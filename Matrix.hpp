@@ -19,6 +19,7 @@ public:
     struct RowIterator;
     struct ColIterator;
     struct DiagIterator;
+    struct Iterator1D;
     struct Iterator;
     Iterator begin() { return Iterator(&(data[0][0]));}
     DiagIterator diagBegin() { return DiagIterator(&(data[0]),0); }

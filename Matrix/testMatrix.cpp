@@ -1,12 +1,13 @@
-#include "MatrixTypes.hpp"
+#include "Matrix.hpp"
+#include "Value.hpp"
 #include <iostream>
 
-using namespace CFD::Utils;
+using namespace CFD::Types;
 
 int main() {
-    Scalar* tmp = new Scalar(5);
-    Scalar* tmp2 = new Scalar(7);
-    std::unique_ptr<Value> res = (*tmp) + (*tmp2);
-    std::cout << res->get() << "\n";
+    Matrix vel_field = fill(10,1,2);
+    Matrix A = identity(10);
+    Matrix b = A*vel_field;
+    std::cout << b << "\n";
     return 0;
 }

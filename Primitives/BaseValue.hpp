@@ -11,7 +11,6 @@ namespace CFD::Types {
     Template base class for values defining operations between them
     Used for vectors, scalars, matrices, etc
 */
-template <typename Type>
 class Value {
 protected:
     size_t dimensions;
@@ -25,11 +24,11 @@ public:
     std::vector<size_t> get_shape() const { return data_shape; }
 
     virtual ~Value() = default;
-    virtual Type get(std::vector<int> indices={}) const = 0;
-    virtual std::unique_ptr<Value> operator+(const Value& other) = 0;
-    virtual std::unique_ptr<Value> operator-(const Value& other) = 0;
-    virtual std::unique_ptr<Value> operator*(const Value& other) = 0;
-    virtual std::unique_ptr<Value> operator/(const Value& other) = 0;
+    virtual double get(std::vector<int> indices={}) const = 0;
+    virtual std::unique_ptr<Value> operator+(const Value& other) const = 0;
+    virtual std::unique_ptr<Value> operator-(const Value& other) const = 0;
+    virtual std::unique_ptr<Value> operator*(const Value& other) const = 0;
+    virtual std::unique_ptr<Value> operator/(const Value& other) const = 0;
 };
 
 }

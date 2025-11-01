@@ -1,16 +1,18 @@
 #pragma once
 #include "BaseValue.hpp"
+#include <iostream>
 
 namespace CFD::Types {
 
-class Vector : public Value<double> {
+class Vector : public Value {
 private:
     std::array<double,3> data;
 
 public:
-    Vector() : Value({0,0}) {}
+    Vector() : Value({3}) {}
     Vector(double x, double y, double z) : Value({3}), data{x,y,z} {}
     double get(std::vector<int> indices={}) const {
+        assert(indices.size() == dimensions);
         return data[indices[0]];
     }
     double X() {
@@ -22,7 +24,7 @@ public:
     double Z() {
         return data[0];
     }
-    std::unique_ptr<Value> operator+(const Value& other) {
+    std::unique_ptr<Value> operator+(const Value& other) const {
         assert(other.get_dimensions() == 0 || other.get_dimensions() == get_dimensions());
         Value* tmp = new Vector(
             data[0]+other.get({0}),
@@ -30,15 +32,15 @@ public:
             data[2]+other.get({2}));
         return std::unique_ptr<Value>(tmp);
     };
-    std::unique_ptr<Value> operator-(const Value& other) {
+    std::unique_ptr<Value> operator-(const Value& other) const {
         Value* tmp = new Vector();
         return std::unique_ptr<Value>(tmp);
     };
-    std::unique_ptr<Value> operator*(const Value& other) {
+    std::unique_ptr<Value> operator*(const Value& other) const {
         Value* tmp = new Vector();
         return std::unique_ptr<Value>(tmp);
     };
-    std::unique_ptr<Value> operator/(const Value& other) {
+    std::unique_ptr<Value> operator/(const Value& other) const {
         Value* tmp = new Vector();
         return std::unique_ptr<Value>(tmp);
     };
